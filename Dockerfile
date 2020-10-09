@@ -1,7 +1,6 @@
 FROM debian:buster-slim
 
 ARG PHP_VERSION=7.3
-ARG PHPMYADMIN=4.8.5
 ARG RUNPKGS="software-properties-common \
              apt-transport-https \
              vim \
@@ -49,7 +48,7 @@ RUN apt-get update                         && \
     rm -rf /var/lib/apt/lists/* &&  \
     echo $PHP_VERSION > /PHP_VERSION && \
     rm /var/www/html/* && \
-    git  clone --recursive https://github.com/OS4ED/openSIS-Responsive-Design.git /var/www/html && \
+    git  clone --recursive https://github.com/uni4online/openSIS-Responsive-Design.git /var/www/html && \
     chown -R www-data.www-data /var/www/html && \
     a2enmod proxy_fcgi setenvif && \
     a2enconf php$PHP_VERSION-fpm  && \

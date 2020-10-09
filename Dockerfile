@@ -9,7 +9,6 @@ ARG RUNPKGS="software-properties-common \
              apache2 \
              libapache2-mod-fcgid \
              libfcgi-bin \
-             mariadb-server \
              mariadb-client \
              php$PHP_VERSION \
              php$PHP_VERSION-cli \
@@ -38,7 +37,7 @@ ARG RUNPKGS="software-properties-common \
              php$PHP_VERSION-interbase \
              php$PHP_VERSION-ldap \
              php$PHP_VERSION-tidy \
-             php-tcpdf \
+            #  php-tcpdf \ #required to generate PDFs
              php-redis \
              php-imagick"
 
@@ -49,8 +48,9 @@ RUN apt-get update                         && \
     apt-get --no-install-recommends install -y $RUNPKGS && \
     rm -rf /var/lib/apt/lists/* &&  \
     echo $PHP_VERSION > /PHP_VERSION && \
-    git  clone --recursive https://github.com/OS4ED/openSIS-Responsive-Design.git /var/www/html/opensis && \
-    chown -R www-data.www-data /var/www/html/opensis && \
+    rm /var/www/html/* && \
+    git  clone --recursive https://github.com/OS4ED/openSIS-Responsive-Design.git /var/www/html && \
+    chown -R www-data.www-data /var/www/html && \
     a2enmod proxy_fcgi setenvif && \
     a2enconf php$PHP_VERSION-fpm  && \
     apt-get -y remove git && \

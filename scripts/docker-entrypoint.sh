@@ -25,11 +25,7 @@ $(which sed) -i 's/%PHP_VERSION%/'$PHPVERSION'/g' /etc/php/$PHPVERSION/fpm/php-f
 
 #START SERVICES
 /etc/init.d/php$PHPVERSION-fpm start
-/etc/init.d/mysql start
 /etc/init.d/apache2 start
-
-#Create mariadb user
-mysql < /build.sql
 
 #KEEP CONTAINER ALIVE
 /usr/bin/tail -f /var/log/apache2/access.log

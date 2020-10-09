@@ -43,7 +43,7 @@ ARG RUNPKGS="software-properties-common \
 
 
 
-COPY ./scripts/docker-entrypoint.sh  ./scripts/build.sql /
+COPY ./scripts/docker-entrypoint.sh /
 RUN apt-get update                         && \
     apt-get --no-install-recommends install -y $RUNPKGS && \
     rm -rf /var/lib/apt/lists/* &&  \
